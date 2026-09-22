@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rangga Byian Tri Putra, S.T. | Wireless Communication & IoT Engineering Portfolio</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        eco: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                        },
+                        tech: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes spinClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spinCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes rfPulseRing {
+            0% { transform: scale(0.5); opacity: 0.9; }
+            100% { transform: scale(2.3); opacity: 0; }
+        }
+        @keyframes circuitGlowTravel {
+            0% { stroke-dashoffset: 800; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes leafDriftOne {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translate(140px, 480px) rotate(280deg); opacity: 0; }
+        }
+        @keyframes leafDriftTwo {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translate(-160px, 520px) rotate(-320deg); opacity: 0; }
+        }
+
+        .animate-spin-clockwise { animation: spinClockwise 32s linear infinite; }
+        .animate-spin-counter { animation: spinCounterClockwise 24s linear infinite; }
+        .animate-rf-pulse-1 { animation: rfPulseRing 3.2s ease-out infinite; }
+        .animate-rf-pulse-2 { animation: rfPulseRing 3.2s ease-out 1.6s infinite; }
+        .animate-leaf-1 { animation: leafDriftOne 19s ease-in-out infinite; }
+        .animate-leaf-2 { animation: leafDriftTwo 23s ease-in-out infinite 3s; }
+
+        /* Light Mode Mesh Background */
+        .bg-eco-tech-mesh-light {
+            background-color: #f8fafc;
+            background-image:
+                radial-gradient(circle at 10% 12%, rgba(16, 185, 129, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 90% 88%, rgba(14, 165, 233, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 80% 18%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+        }
+
+        .bg-canvas-dots-light {
+            background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.2px, transparent 1.2px);
+            background-size: 24px 24px;
+        }
+
+        .circuit-line {
+            stroke-dasharray: 20 10;
+            animation: circuitGlowTravel 28s linear infinite;
+        }
+
+        /* Figma / Illustrator Corner Handles Selection Box in Light Mode */
+        .selection-box-light {
+            position: relative;
+            border: 1px dashed rgba(5, 150, 105, 0.4);
+        }
+        .selection-box-light::before,
+        .selection-box-light::after,
+        .selection-handle-bl,
+        .selection-handle-br {
+            content: '';
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background-color: #059669;
+            border: 1px solid #ffffff;
+            z-index: 20;
+        }
+        .selection-box-light::before { top: -4px; left: -4px; }
+        .selection-box-light::after { top: -4px; right: -4px; }
+        .selection-handle-bl { bottom: -4px; left: -4px; }
+        .selection-handle-br { bottom: -4px; right: -4px; }
+
+        /* Custom Scrollbar for Light Theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen py-8 px-4 md:px-8 bg-eco-tech-mesh-light bg-canvas-dots-light text-slate-800 font-sans selection:bg-emerald-200 selection:text-emerald-950 overflow-x-hidden relative">
+
+    <!-- Canvas WSN Background -->
+    <canvas id="wsnCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-60"></canvas>
+
+    <!-- Vector Ornaments Overlay Layer (Light Theme Adapted) -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+        <!-- Kanan Atas: Engineering Gearwheel & Measurement Ring -->
+        <div class="absolute -top-12 -right-12 w-96 h-96 opacity-20 md:opacity-30 animate-spin-clockwise text-emerald-600">
+            <svg viewBox="0 0 200 200" class="w-full h-full fill-none stroke-current" stroke-width="1.2">
+                <circle cx="100" cy="100" r="90" stroke-dasharray="2 6" stroke-width="1.5" />
+                <circle cx="100" cy="100" r="78" stroke-opacity="0.6" />
+                <circle cx="100" cy="100" r="65" stroke-dasharray="8 4" stroke-width="1" />
+                <path d="M100 15 L105 28 L115 25 L118 38 L130 32 L130 46 L142 38 L139 52 L152 48 L146 60 L158 58 L150 70 L160 72 L150 82 L160 87 L148 95 L156 102 L143 108 L149 117 L135 120 L138 131 L124 132 L124 144 L111 142 L108 154 L97 149 L92 160 L83 152 L76 161 L70 150 L61 157 L57 144 L47 148 L46 135 L35 136 L37 123 L26 121 L31 109 L20 105 L27 95 L16 88 L25 80 L16 71 L27 65 L19 54 L31 51 L26 39 L38 38 L36 25 L48 27 L49 15 L60 19 L64 8 L74 15 L80 5 L88 15 Z" stroke-opacity="0.5" />
+                <text x="100" y="22" font-size="6" fill="currentColor" text-anchor="middle" font-family="monospace">000°</text>
+                <text x="180" y="102" font-size="6" fill="currentColor" text-anchor="middle" font-family="monospace">090°</text>
+                <text x="100" y="184" font-size="6" fill="currentColor" text-anchor="middle" font-family="monospace">180°</text>
+                <text x="20" y="102" font-size="6" fill="currentColor" text-anchor="middle" font-family="monospace">270°</text>
+            </svg>
+        </div>
+
+        <!-- Kiri Tengah: Glowing Circuit Trace Lines -->
+        <div class="absolute top-1/3 -left-10 w-80 h-96 opacity-25">
+            <svg viewBox="0 0 200 300" class="w-full h-full fill-none stroke-sky-600" stroke-width="1.8">
+                <path d="M0,50 H80 L120,90 V180 L160,220 H200" class="circuit-line" />
+                <path d="M0,110 H50 L90,150 V240 H180" class="circuit-line" stroke-opacity="0.6" />
+                <circle cx="120" cy="90" r="4" fill="#0284c7" />
+                <circle cx="160" cy="220" r="4" fill="#059669" />
+                <circle cx="90" cy="150" r="3" fill="#0284c7" />
+            </svg>
+        </div>
+
+        <!-- Kiri Bawah: Telemetry Antenna & RF Waves -->
+        <div class="absolute bottom-12 left-8 w-48 h-48 opacity-30 flex items-center justify-center">
+            <div class="relative w-full h-full flex items-center justify-center">
+                <div class="absolute w-12 h-12 rounded-full border border-sky-500 animate-rf-pulse-1"></div>
+                <div class="absolute w-12 h-12 rounded-full border border-emerald-500 animate-rf-pulse-2"></div>
+                <i class="fa-solid fa-tower-cell text-sky-600 text-3xl"></i>
+            </div>
+        </div>
+
+        <!-- Drifting Leaf Particles -->
+        <div class="absolute top-1/4 left-1/5 text-emerald-600/40 animate-leaf-1 pointer-events-none">
+            <i class="fa-solid fa-leaf text-xl"></i>
+        </div>
+        <div class="absolute top-1/3 right-1/4 text-teal-600/35 animate-leaf-2 pointer-events-none">
+            <i class="fa-solid fa-seedling text-2xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-[1380px] mx-auto relative z-10 space-y-8">
+
+        <!-- HEADER / NAVIGATION -->
+        <header class="bg-white/80 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl shadow-slate-200/50 selection-box-light">
+            <div class="selection-handle-bl"></div>
+            <div class="selection-handle-br"></div>
+
+            <div class="flex items-center gap-3">
+                <div class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-600"></span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-wide">Portofolio</h1>
+                    <p class="text-xs text-slate-500 font-mono">Rangga Byian Tri Putra, S.T., from Riau, Indonesia • Open to Opportunities</p>
+                </div>
+            </div>
+
+            <!-- Header Badge -->
+            <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold shadow-sm">
+                <i class="fa-solid fa-satellite-dish text-emerald-600"></i>
+                <span>Wireless Communication & IoT Engineering</span>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <!-- Left Hero Info (8 Columns) -->
+            <div class="lg:col-span-8 bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-6 md:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden space-y-6">
+
+                <!-- Profile Row -->
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+
+                    <!-- Profile Picture -->
+                    <div class="relative group flex-shrink-0">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-sky-400 rounded-2xl blur opacity-40 group-hover:opacity-70 transition duration-500"></div>
+                        <div class="relative w-36 h-36 md:w-40 md:h-40 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center">
+                            <img src="https://lh3.googleusercontent.com/d/1wx678An69yzXTcG80WyiMYePCdmTcIgC"
+                                 alt="Rangga Byian Tri Putra, S.T."
+                                 class="w-full h-full object-cover object-center filter contrast-105 brightness-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <!-- Name & Primary Actions -->
+                    <div class="space-y-4 text-center sm:text-left flex-1">
+                        <div>
+                            <span class="text-xs font-mono font-bold text-emerald-700 uppercase tracking-widest bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">
+                                Electrical Engineering Graduate
+                            </span>
+                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 leading-tight">
+                                Rangga Byian Tri Putra, S.T.
+                            </h2>
+                            <p class="text-sm text-slate-600 font-medium mt-1">
+                                Wireless Communication, IoT & Embedded Systems for Environmental Monitoring
+                            </p>
+                        </div>
+
+                        <!-- Action Buttons & Location Row -->
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1">
+                            <a href="#projects" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-all shadow-md shadow-emerald-600/20 flex items-center gap-2">
+                                <i class="fa-solid fa-cubes"></i>
+                                <span>Portofolio</span>
+                            </a>
+                            <a href="#contact" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-emerald-600"></i>
+                                <span>Kontak</span>
+                            </a>
+                            <div class="flex items-center gap-1.5 text-xs text-slate-600 font-medium px-3 py-2 rounded-xl bg-slate-100 border border-slate-200">
+                                <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                <span>Riau, Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABOUT USER CARD -->
+                <div class="pt-4 border-t border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                            <i class="fa-solid fa-user-gear text-emerald-600"></i>
+                            <span>About User</span>
+                        </h3>
+                        <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Universitas Riau, 2022–2026</span>
+                    </div>
+
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Lulusan Teknik Elektro Universitas Riau dengan pengalaman riset di bidang <strong class="text-slate-900">sistem komunikasi nirkabel, Internet of Things (IoT), dan embedded systems</strong>. Sebagai Research Assistant di Badan Riset dan Inovasi Nasional (BRIN), berkontribusi pada riset sistem sensing otonom, integrasi sensor, dan evaluasi performa komunikasi. Proyek akhir kuliah berfokus pada sistem transmisi citra berbasis LoRa menggunakan Arduino Uno. Tertarik pada bidang Wireless Communication, RF & Microwave Engineering, Wireless Sensor Network, LPWAN, dan sistem IoT cerdas untuk pemantauan lingkungan.
+                    </p>
+
+                    <!-- Skill Pill Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-wifi mr-1 text-[10px]"></i> Wireless Communication
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-microchip mr-1 text-[10px]"></i> Internet of Things
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-code mr-1 text-[10px]"></i> Embedded Systems
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-wave-square mr-1 text-[10px]"></i> Signal Processing
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-tower-broadcast mr-1 text-[10px]"></i> LPWAN / LoRa
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-tree mr-1 text-[10px]"></i> Environmental Monitoring
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-mono font-medium">
+                            <i class="fa-solid fa-satellite mr-1 text-[10px]"></i> Wireless Sensor Network
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-violet-50 border border-violet-200 text-violet-800 text-xs font-mono font-medium">
+                            <i class="fa-brands fa-python mr-1 text-[10px]"></i> Python Programming
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Card: Degree & Study Duration (4 Columns) -->
+            <div class="lg:col-span-4 bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-6 shadow-xl shadow-slate-200/50 relative flex flex-col justify-between space-y-6">
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono text-slate-500 uppercase tracking-widest font-semibold">Academic Record</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-[11px] font-bold">
+                            UNRI
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">
+                        Bachelor of Electrical Engineering (S1)
+                    </h3>
+                    <p class="text-xs text-slate-500">
+                        Universitas Riau • Jurusan Teknik Elektro
+                    </p>
+                </div>
+
+                <!-- Study Period Box -->
+                <div class="flex flex-col items-center justify-center py-2 bg-slate-50 rounded-2xl border border-slate-200 p-4">
+                    <div class="relative w-36 h-36 flex items-center justify-center">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="text-slate-200"
+                                  stroke-width="3.5"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="text-emerald-600"
+                                  stroke-dasharray="95, 100"
+                                  stroke-width="3.5"
+                                  stroke-linecap="round"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="absolute flex flex-col items-center justify-center text-center">
+                            <span class="text-2xl font-black text-slate-900 tracking-tight">2022</span>
+                            <span class="text-[10px] text-emerald-700 font-mono uppercase tracking-wider font-bold">— 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badge: Coursework Focus -->
+                <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 text-center space-y-1 shadow-sm">
+                    <div class="text-[11px] font-mono text-emerald-800 uppercase font-bold">
+                        <i class="fa-solid fa-book mr-1"></i> Relevant Coursework
+                    </div>
+                    <div class="text-xs font-semibold text-slate-900 leading-relaxed">
+                        Digital &amp; Data Communication, Microprocessor, Signal Processing, Embedded System, Telecommunication System
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & NATIONAL RESEARCH SECTION -->
+        <section id="education" class="space-y-6 pt-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200">
+                        <i class="fa-solid fa-graduation-cap text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Education & National Research</h3>
+                        <p class="text-xs text-slate-500">Pendidikan Tinggi dan Rekam Jejak Riset Nasional</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Academic Education Card -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-6 shadow-lg shadow-slate-200/50 relative overflow-hidden group hover:border-emerald-400 transition-all">
+                    <div class="flex items-start justify-between">
+                        <div class="space-y-1">
+                            <span class="text-xs font-mono text-emerald-700 font-bold uppercase">2022 — 2026</span>
+                            <h4 class="text-lg font-bold text-slate-900">Universitas Riau (UNRI)</h4>
+                            <p class="text-sm text-slate-600 font-medium">S1 Teknik Elektro (Sarjana Teknik)</p>
+                        </div>
+                        <span class="p-2.5 rounded-xl bg-slate-100 text-emerald-700 border border-slate-200 text-xs font-bold font-mono">
+                            Bachelor
+                        </span>
+                    </div>
+
+                    <ul class="mt-4 space-y-2 text-xs text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                            <span>Tugas Akhir: <strong class="text-slate-900">"Design and Construction of LoRa Communication Based Image Delivery System E220-900T30D Integrated with Arduino Uno"</strong> — evaluasi Packet Success Rate, Packet Loss Rate, dan delay transmisi pada skenario LOS/NLOS.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                            <span>Mata kuliah relevan: Digital Communication, Microprocessor, Computer Networks, Data Communication, Signal Processing, Embedded System, Telecommunication System, Wireless Communication.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                            <span>Aktif sebagai Telecommunication Laboratory Assistant (Jul–Des 2024), mendukung praktikum mikroprosesor dan mikrokontroler.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- National Research Institution Card -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-6 shadow-lg shadow-slate-200/50 relative overflow-hidden group hover:border-sky-400 transition-all">
+                    <div class="flex items-start justify-between">
+                        <div class="space-y-1">
+                            <span class="text-xs font-mono text-sky-700 font-bold uppercase">Feb 2025 — Jul 2025 (6 bulan)</span>
+                            <h4 class="text-lg font-bold text-slate-900">BRIN RI (Badan Riset & Inovasi Nasional)</h4>
+                            <p class="text-sm text-slate-600 font-medium">Research Assistant</p>
+                        </div>
+                        <span class="p-2.5 rounded-xl bg-slate-100 text-sky-700 border border-slate-200 text-xs font-bold font-mono">
+                            BRIN RI
+                        </span>
+                    </div>
+
+                    <ul class="mt-4 space-y-2 text-xs text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-microchip text-sky-600 mt-0.5"></i>
+                            <span>Riset sistem sensing kendaraan listrik otonom (autonomous electric vehicle sensing systems).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-microchip text-sky-600 mt-0.5"></i>
+                            <span>Integrasi LiDAR, kamera RGBD, dan sensor tertanam untuk sistem persepsi.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-microchip text-sky-600 mt-0.5"></i>
+                            <span>Evaluasi performa komunikasi dan sensing pada berbagai kondisi operasi; kolaborasi riset multidisiplin dan penyusunan laporan teknis.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL & ORGANIZATIONAL EXPERIENCE SECTION -->
+        <section id="experience" class="space-y-6 pt-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-teal-100 text-teal-700 border border-teal-200">
+                        <i class="fa-solid fa-briefcase text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Pengalaman Profesional & Organisasi</h3>
+                        <p class="text-xs text-slate-500">Rekam Jejak di Lembaga Riset, Penyiaran, Kampus, dan Organisasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Experience 1: LPP RRI Pekanbaru -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex flex-col justify-between hover:border-emerald-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-mono font-bold">
+                                LPP RRI Pekanbaru
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Jan 2025 (1 bulan)</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900">Antenna and Signal Processing Technician</h4>
+                            <p class="text-xs text-slate-500">LPP Radio Republik Indonesia (RRI) Pekanbaru</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Melakukan monitoring pemancar dan analisis kualitas sinyal, troubleshooting masalah transmisi siaran, perawatan preventif sistem broadcast, dan membantu penyelesaian masalah konektivitas relay transmitter.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> Broadcast Engineering</span>
+                        <span class="text-indigo-700 font-bold">RF Communication</span>
+                    </div>
+                </div>
+
+                <!-- Experience 2: Universitas Riau Lab Assistant -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex flex-col justify-between hover:border-emerald-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono font-bold">
+                                Universitas Riau
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Jul 2024 – Des 2024 (6 bulan)</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900">Telecommunication Laboratory Assistant</h4>
+                            <p class="text-xs text-slate-500">Universitas Riau</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Mendukung sesi praktikum mikroprosesor dan mikrokontroler, membantu mahasiswa troubleshooting hardware/software, mendukung setup laboratorium, serta mendokumentasikan prosedur teknis.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> Lab Assistant</span>
+                        <span class="text-sky-700 font-bold">Microcontroller Systems</span>
+                    </div>
+                </div>
+
+                <!-- Experience 3: IEEE Student Branch -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex flex-col justify-between hover:border-emerald-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-amber-800 text-xs font-mono font-bold">
+                                IEEE Student Branch UNRI
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Des 2025 – Mar 2026</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900">Director</h4>
+                            <p class="text-xs text-slate-500">IEEE Student Branch, Universitas Riau</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Memimpin operasional organisasi dan eksekusi program teknis, mengoordinasikan event/workshop IT, mengelola kolaborasi tim, serta mengawasi komite teknis dan alur kerja operasional.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> Organizational Leadership</span>
+                        <span class="text-amber-800 font-bold">IEEE Indonesia Section</span>
+                    </div>
+                </div>
+
+                <!-- Experience 4: HIMATRO -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex flex-col justify-between hover:border-emerald-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-rose-50 border border-rose-200 text-rose-700 text-xs font-mono font-bold">
+                                HIMATRO UNRI
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Jan 2025 – Jul 2025 (7 bulan)</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900">Head of Household Development & Secretariat</h4>
+                            <p class="text-xs text-slate-500">Himpunan Mahasiswa Teknik Elektro, Universitas Riau</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Mengelola tata kelola administrasi, perencanaan ruang, urusan kesekretariatan, dan inventaris aset; mengawasi inisiatif kewirausahaan dan program koperasi mahasiswa.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> Student Organization</span>
+                        <span class="text-rose-700 font-bold">Administration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CURRENT WORK SECTION -->
+        <section id="work" class="space-y-6 pt-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-sky-100 text-sky-700 border border-sky-200">
+                        <i class="fa-solid fa-building text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Pengalaman Kerja Saat Ini</h3>
+                        <p class="text-xs text-slate-500">PT Lestari Prima Agritech (Member of KLH/BPH Indonesia)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Assistant Secretary -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex flex-col justify-between hover:border-emerald-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold">
+                                PT Lestari Prima Agritech
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Mei 2026 – Sekarang</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900">Assistant Secretary</h4>
+                            <p class="text-xs text-slate-500">Administration & Digital Marketing</p>
+                        </div>
+                        <ul class="text-xs text-slate-600 leading-relaxed space-y-1.5">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i><span>Mengelola penerimaan, inspeksi, dan dokumentasi barang produksi.</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i><span>Menangani catatan administratif dan data operasional harian.</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i><span>Mendukung digital marketing: pembuatan konten, promosi produk, dan media sosial.</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> Current Role</span>
+                        <span class="text-emerald-700 font-bold">Administration</span>
+                    </div>
+                </div>
+
+                <!-- IoT System Development Coordinator -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex flex-col justify-between hover:border-sky-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono font-bold">
+                                PT Lestari Prima Agritech
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Apr 2026 – Mei 2026</span>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900">IoT System Development Coordinator</h4>
+                            <p class="text-xs text-slate-500">IT Development & Digital Infrastructure</p>
+                        </div>
+                        <ul class="text-xs text-slate-600 leading-relaxed space-y-1.5">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-sky-600 mt-0.5"></i><span>Mengoordinasikan proyek pengembangan IT dan infrastruktur digital perusahaan.</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-sky-600 mt-0.5"></i><span>Mengawasi integrasi sistem dan manajemen basis data untuk optimalisasi operasional.</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-sky-600 mt-0.5"></i><span>Berkolaborasi lintas tim untuk menyelaraskan pengembangan teknis dengan kebutuhan bisnis.</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                        <span><i class="fa-regular fa-calendar mr-1"></i> Prior Role</span>
+                        <span class="text-sky-700 font-bold">IT Coordination</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL PROJECTS SECTION -->
+        <section id="projects" class="space-y-6 pt-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-sky-100 text-sky-700 border border-sky-200">
+                        <i class="fa-solid fa-diagram-project text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Proyek Teknik Unggulan</h3>
+                        <p class="text-xs text-slate-500">Sistem IoT, Komunikasi LoRa & Telemetri Lingkungan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Project 1: IIoT Platform -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 flex flex-col justify-between group hover:border-emerald-500 transition-all">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-[11px] font-bold">
+                                Laravel 13 • REST API • ThingsBoard
+                            </span>
+                            <i class="fa-solid fa-server text-emerald-600 text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                            Industrial IoT Monitoring Platform
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Platform IIoT berbasis Laravel 13 untuk mendukung telemetri lingkungan real-time dan manajemen perangkat jarak jauh, dengan integrasi data sensor dari ThingsBoard melalui REST API.
+                        </p>
+                        <div class="space-y-1.5 pt-2 font-mono text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-emerald-600"></i>
+                                <span>Dashboard interaktif: status perangkat, parameter lingkungan, peta lokasi</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-emerald-600"></i>
+                                <span>Role-based authentication & access control</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                        <span>PT Lestari Prima Agritech, 2026–present</span>
+                        <a href="#contact" class="text-emerald-700 hover:underline flex items-center gap-1 font-bold">
+                            <span>Detail</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: LoRa Image Transmission -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 flex flex-col justify-between group hover:border-sky-500 transition-all">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded bg-sky-50 border border-sky-200 text-sky-800 font-mono text-[11px] font-bold">
+                                Arduino Uno • LoRa E220-900T30D • C++
+                            </span>
+                            <i class="fa-solid fa-tower-cell text-sky-600 text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                            LoRa-Based Image Transmission System
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Sistem transmisi citra berbasis paket menggunakan Arduino Uno dan modul LoRa E220-900T30D — proyek Tugas Akhir. Dievaluasi berdasarkan Packet Success Rate, Packet Loss Rate, dan delay transmisi pada skenario LOS/NLOS.
+                        </p>
+                        <div class="space-y-1.5 pt-2 font-mono text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-sky-600"></i>
+                                <span>Algoritma segmentasi paket & rekonstruksi citra</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-sky-600"></i>
+                                <span>Analisis pengaruh jarak & halangan terhadap reliabilitas transmisi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                        <span>Bachelor Final Project, 2025–2026</span>
+                        <a href="#contact" class="text-sky-700 hover:underline flex items-center gap-1 font-bold">
+                            <span>Detail</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Industrial Environmental Logger -->
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 flex flex-col justify-between group hover:border-teal-500 transition-all">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded bg-teal-50 border border-teal-200 text-teal-800 font-mono text-[11px] font-bold">
+                                ESP32 • GSM • RS485 • MQTT
+                            </span>
+                            <i class="fa-solid fa-leaf text-teal-600 text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors">
+                            Industrial IoT Environmental Logger
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Logger IIoT berbasis ESP32 dengan sensor RS485, DHT22, modul GSM, dan penyimpanan SD card. Telemetri andal dengan buffering data offline untuk kondisi jaringan tidak stabil, dimonitor via ThingsBoard.
+                        </p>
+                        <div class="space-y-1.5 pt-2 font-mono text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-teal-600"></i>
+                                <span>Arsitektur modular: sinkronisasi cloud + redundansi penyimpanan lokal</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-teal-600"></i>
+                                <span>Dibangun di atas FreeRTOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+                        <span>PT Lestari Prima Agritech, 2026</span>
+                        <a href="#contact" class="text-teal-700 hover:underline flex items-center gap-1 font-bold">
+                            <span>Detail</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TECH STACK & HARDWARE SECTION -->
+        <section id="skills" class="space-y-6 pt-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200">
+                        <i class="fa-solid fa-layer-group text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Tech Stack & Hardware</h3>
+                        <p class="text-xs text-slate-500">Perangkat Lunak, Mikrokontroler & Protokol Komunikasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-9 gap-4">
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-brands fa-laravel text-rose-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">Laravel 13</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Backend Web</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-brands fa-python text-amber-500 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">Python</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Programming</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-code text-sky-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">C / C++</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Embedded Code</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-microchip text-teal-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">Arduino Uno</span>
+                    <span class="text-[10px] text-slate-500 font-mono">MCU Control</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-wifi text-emerald-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">ESP32</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Wi-Fi MCU</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-tower-broadcast text-sky-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">LoRa / LPWAN</span>
+                    <span class="text-[10px] text-slate-500 font-mono">E220-900T30D</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-network-wired text-indigo-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">MQTT</span>
+                    <span class="text-[10px] text-slate-500 font-mono">IoT Protocol</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-database text-cyan-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">MySQL</span>
+                    <span class="text-[10px] text-slate-500 font-mono">Database</span>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 text-center space-y-2 hover:border-emerald-500 transition-all flex flex-col items-center justify-center shadow-md">
+                    <i class="fa-solid fa-chart-line text-violet-600 text-3xl"></i>
+                    <span class="text-xs font-bold text-slate-900 block">ThingsBoard</span>
+                    <span class="text-[10px] text-slate-500 font-mono">IoT Dashboard</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS & HONORS SECTION -->
+        <section id="certifications" class="space-y-6 pt-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-amber-100 text-amber-700 border border-amber-200">
+                        <i class="fa-solid fa-award text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Sertifikasi & Penghargaan</h3>
+                        <p class="text-xs text-slate-500">Pengakuan Profesional dan Capaian Akademik</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex items-start gap-4">
+                    <div class="p-3 rounded-xl bg-teal-100 text-teal-700 border border-teal-200">
+                        <i class="fa-solid fa-flask text-xl"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-bold text-slate-900">Research Assistant Certification</h4>
+                        <p class="text-xs text-slate-500">Badan Riset & Inovasi Nasional (BRIN)</p>
+                        <p class="text-[11px] text-teal-700 font-mono font-bold">Signal Processing & Telecommunication</p>
+                    </div>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex items-start gap-4">
+                    <div class="p-3 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200">
+                        <i class="fa-solid fa-certificate text-xl"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-bold text-slate-900">BSI Scholarship Awardee</h4>
+                        <p class="text-xs text-slate-500">Bank Syariah Indonesia</p>
+                        <p class="text-[11px] text-emerald-700 font-mono font-bold">Nov 2023 – Present</p>
+                    </div>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-5 shadow-lg shadow-slate-200/50 flex items-start gap-4">
+                    <div class="p-3 rounded-xl bg-sky-100 text-sky-700 border border-sky-200">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-bold text-slate-900">LSP P1 Certification</h4>
+                        <p class="text-xs text-slate-500">Lembaga Sertifikasi Profesi Pihak Pertama</p>
+                        <p class="text-[11px] text-sky-700 font-mono font-bold">Electrical Systems & Design Planning</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+       <!-- CONTACT & CONNECT SECTION -->
+<section id="contact" class="space-y-6 pt-4">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between border-b border-slate-200/80 pb-4">
+        <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/20">
+                <i class="fa-solid fa-envelope-open-text text-lg"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-slate-900 tracking-tight">Kontak & Hubungkan</h3>
+                <p class="text-xs text-slate-500">Mari Berdiskusi Mengenai Proyek IoT, Riset, atau Kolaborasi Industri</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bento Layout Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+        <!-- Left Banner (Social Media Card) -->
+        <div class="relative overflow-hidden md:col-span-4 bg-gradient-to-br from-emerald-600 via-teal-600 to-blue-700 text-white rounded-3xl p-6 flex flex-col justify-between shadow-xl min-h-[280px] group">
+            <!-- SVG Motif Batik Pucuk Rebung -->
+            <svg class="absolute right-0 top-0 bottom-0 h-full w-auto text-white/20 group-hover:text-white/30 transition-all duration-300 pointer-events-none py-1" viewBox="0 0 466 659" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M232,41 L215,101 L223,127 L209,127 L202,138 L207,144 L213,138 L223,143 L225,236 L215,222 L221,165 L213,150 L201,152 L210,164 L203,223 L226,257 L196,223 L204,185 L199,167 L194,168 L181,219 L188,242 L222,269 L227,285 L209,268 L182,269 L182,255 L174,248 L161,303 L178,330 L163,332 L156,346 L162,356 L171,358 L180,348 L167,342 L184,340 L205,357 L214,400 L209,509 L203,521 L189,530 L176,529 L166,521 L168,507 L177,516 L190,511 L186,495 L170,491 L198,471 L207,446 L209,415 L196,380 L158,358 L149,347 L149,362 L159,370 L138,384 L136,401 L150,413 L163,413 L170,399 L162,391 L149,395 L151,384 L161,376 L183,381 L198,408 L197,448 L185,469 L170,480 L154,481 L140,473 L140,461 L149,449 L159,454 L151,461 L158,473 L170,473 L177,466 L178,457 L167,445 L176,429 L166,416 L161,427 L135,442 L127,437 L120,466 L132,487 L171,492 L157,506 L155,522 L166,534 L186,537 L176,542 L158,540 L139,494 L122,490 L113,495 L129,537 L158,552 L178,552 L196,544 L219,513 L222,382 L206,342 L171,301 L180,278 L198,275 L211,284 L213,299 L210,304 L203,295 L193,295 L190,311 L209,319 L226,303 L223,519 L206,563 L170,594 L155,596 L145,584 L145,574 L154,566 L167,577 L172,574 L171,564 L159,555 L141,555 L127,569 L121,564 L111,566 L109,570 L131,594 L114,603 L109,619 L119,612 L166,612 L192,598 L218,562 L232,513 L247,562 L271,596 L303,613 L346,612 L356,619 L348,599 L333,594 L356,568 L345,564 L338,569 L326,556 L308,554 L294,564 L293,574 L297,578 L312,566 L320,584 L310,596 L297,595 L261,565 L242,517 L239,303 L255,319 L275,311 L273,296 L262,295 L255,304 L251,299 L255,283 L265,276 L285,278 L294,301 L259,342 L243,382 L246,513 L269,544 L287,552 L307,552 L336,537 L352,495 L330,491 L307,540 L279,538 L303,532 L310,522 L307,504 L293,492 L326,490 L343,467 L337,437 L327,441 L304,428 L297,416 L288,429 L296,446 L285,463 L291,471 L305,473 L313,464 L305,453 L314,449 L324,463 L320,477 L310,481 L288,477 L273,462 L266,445 L266,407 L282,380 L301,376 L314,385 L314,395 L300,391 L294,398 L294,407 L301,413 L316,412 L328,400 L325,383 L305,370 L314,363 L314,347 L303,360 L266,382 L254,414 L263,466 L290,491 L278,496 L275,511 L288,516 L297,507 L300,519 L289,529 L277,530 L265,524 L257,511 L251,423 L255,368 L260,357 L281,340 L298,342 L285,349 L294,358 L303,356 L309,345 L301,331 L287,330 L304,303 L292,249 L283,255 L283,269 L256,268 L238,285 L243,269 L280,238 L284,218 L271,167 L266,167 L261,185 L269,223 L239,257 L262,223 L255,164 L264,151 L253,149 L244,163 L249,226 L240,236 L242,145 L251,138 L259,144 L262,134 L255,126 L242,127 L250,101 Z" />
+            </svg>
+
+            <!-- Background Glow -->
+            <div class="absolute -top-12 -left-12 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner mb-5">
+                    <i class="fa-solid fa-paper-plane text-2xl text-white"></i>
+                </div>
+                <h4 class="text-xl font-black leading-tight tracking-wide drop-shadow-sm pr-12">
+                    Yuk kenali aku dari Media Sosial Aku!
+                </h4>
+            </div>
+
+            <!-- Tombol Media Sosial & Akademik -->
+            <div class="relative z-10 flex items-center justify-between gap-2 mt-6">
+                <a href="https://instagram.com/_r.byian1635" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white hover:text-pink-600 hover:scale-110 text-white p-3 rounded-2xl transition-all duration-300 flex-1 flex items-center justify-center shadow-lg">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-600 hover:scale-110 text-white p-3 rounded-2xl transition-all duration-300 flex-1 flex items-center justify-center shadow-lg">
+                    <i class="fa-brands fa-facebook text-xl"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white hover:text-slate-900 hover:scale-110 text-white p-3 rounded-2xl transition-all duration-300 flex-1 flex items-center justify-center shadow-lg">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" class="bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-500 hover:scale-110 text-white p-3 rounded-2xl transition-all duration-300 flex-1 flex items-center justify-center shadow-lg">
+                    <i class="fa-brands fa-google-scholar text-xl"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="ORCID" class="bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white hover:text-emerald-600 hover:scale-110 text-white p-3 rounded-2xl transition-all duration-300 flex-1 flex items-center justify-center shadow-lg">
+                    <i class="fa-brands fa-orcid text-xl"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Bento Grid Items -->
+        <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <!-- Item 1: Email -->
+            <a href="mailto:rangga.byian@gmail.com" class="group relative overflow-hidden p-4 rounded-3xl bg-gradient-to-r from-sky-50/90 via-blue-100/50 to-indigo-100/70 border border-blue-200/60 flex items-center justify-between hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex items-center space-x-3.5 relative z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Email</div>
+                        <div class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition-colors">rangga.byian@gmail.com</div>
+                    </div>
+                </div>
+
+                <!-- Batik Pucuk Rebung SVG -->
+                <svg class="absolute right-0 top-0 bottom-0 h-full w-auto text-blue-900/15 group-hover:text-blue-900/25 transition-all duration-300 pointer-events-none py-1" viewBox="0 0 466 659" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M232,41 L215,101 L223,127 L209,127 L202,138 L207,144 L213,138 L223,143 L225,236 L215,222 L221,165 L213,150 L201,152 L210,164 L203,223 L226,257 L196,223 L204,185 L199,167 L194,168 L181,219 L188,242 L222,269 L227,285 L209,268 L182,269 L182,255 L174,248 L161,303 L178,330 L163,332 L156,346 L162,356 L171,358 L180,348 L167,342 L184,340 L205,357 L214,400 L209,509 L203,521 L189,530 L176,529 L166,521 L168,507 L177,516 L190,511 L186,495 L170,491 L198,471 L207,446 L209,415 L196,380 L158,358 L149,347 L149,362 L159,370 L138,384 L136,401 L150,413 L163,413 L170,399 L162,391 L149,395 L151,384 L161,376 L183,381 L198,408 L197,448 L185,469 L170,480 L154,481 L140,473 L140,461 L149,449 L159,454 L151,461 L158,473 L170,473 L177,466 L178,457 L167,445 L176,429 L166,416 L161,427 L135,442 L127,437 L120,466 L132,487 L171,492 L157,506 L155,522 L166,534 L186,537 L176,542 L158,540 L139,494 L122,490 L113,495 L129,537 L158,552 L178,552 L196,544 L219,513 L222,382 L206,342 L171,301 L180,278 L198,275 L211,284 L213,299 L210,304 L203,295 L193,295 L190,311 L209,319 L226,303 L223,519 L206,563 L170,594 L155,596 L145,584 L145,574 L154,566 L167,577 L172,574 L171,564 L159,555 L141,555 L127,569 L121,564 L111,566 L109,570 L131,594 L114,603 L109,619 L119,612 L166,612 L192,598 L218,562 L232,513 L247,562 L271,596 L303,613 L346,612 L356,619 L348,599 L333,594 L356,568 L345,564 L338,569 L326,556 L308,554 L294,564 L293,574 L297,578 L312,566 L320,584 L310,596 L297,595 L261,565 L242,517 L239,303 L255,319 L275,311 L273,296 L262,295 L255,304 L251,299 L255,283 L265,276 L285,278 L294,301 L259,342 L243,382 L246,513 L269,544 L287,552 L307,552 L336,537 L352,495 L330,491 L307,540 L279,538 L303,532 L310,522 L307,504 L293,492 L326,490 L343,467 L337,437 L327,441 L304,428 L297,416 L288,429 L296,446 L285,463 L291,471 L305,473 L313,464 L305,453 L314,449 L324,463 L320,477 L310,481 L288,477 L273,462 L266,445 L266,407 L282,380 L301,376 L314,385 L314,395 L300,391 L294,398 L294,407 L301,413 L316,412 L328,400 L325,383 L305,370 L314,363 L314,347 L303,360 L266,382 L254,414 L263,466 L290,491 L278,496 L275,511 L288,516 L297,507 L300,519 L289,529 L277,530 L265,524 L257,511 L251,423 L255,368 L260,357 L281,340 L298,342 L285,349 L294,358 L303,356 L309,345 L301,331 L287,330 L304,303 L292,249 L283,255 L283,269 L256,268 L238,285 L243,269 L280,238 L284,218 L271,167 L266,167 L261,185 L269,223 L239,257 L262,223 L255,164 L264,151 L253,149 L244,163 L249,226 L240,236 L242,145 L251,138 L259,144 L262,134 L255,126 L242,127 L250,101 Z" />
+                </svg>
+            </a>
+
+            <!-- Item 2: LinkedIn -->
+            <a href="https://linkedin.com/in/RByianTriPutra" target="_blank" class="group relative overflow-hidden p-4 rounded-3xl bg-gradient-to-r from-blue-50/90 via-sky-100/50 to-blue-200/60 border border-sky-200/60 flex items-center justify-between hover:border-sky-400 hover:shadow-xl hover:shadow-sky-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex items-center space-x-3.5 relative z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-700 to-sky-500 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-blue-600/20 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">LinkedIn</div>
+                        <div class="text-xs font-bold text-slate-900 truncate group-hover:text-sky-600 transition-colors">in/RByianTriPutra</div>
+                    </div>
+                </div>
+
+                <!-- Batik Pucuk Rebung SVG -->
+                <svg class="absolute right-0 top-0 bottom-0 h-full w-auto text-sky-900/15 group-hover:text-sky-900/25 transition-all duration-300 pointer-events-none py-1" viewBox="0 0 466 659" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M232,41 L215,101 L223,127 L209,127 L202,138 L207,144 L213,138 L223,143 L225,236 L215,222 L221,165 L213,150 L201,152 L210,164 L203,223 L226,257 L196,223 L204,185 L199,167 L194,168 L181,219 L188,242 L222,269 L227,285 L209,268 L182,269 L182,255 L174,248 L161,303 L178,330 L163,332 L156,346 L162,356 L171,358 L180,348 L167,342 L184,340 L205,357 L214,400 L209,509 L203,521 L189,530 L176,529 L166,521 L168,507 L177,516 L190,511 L186,495 L170,491 L198,471 L207,446 L209,415 L196,380 L158,358 L149,347 L149,362 L159,370 L138,384 L136,401 L150,413 L163,413 L170,399 L162,391 L149,395 L151,384 L161,376 L183,381 L198,408 L197,448 L185,469 L170,480 L154,481 L140,473 L140,461 L149,449 L159,454 L151,461 L158,473 L170,473 L177,466 L178,457 L167,445 L176,429 L166,416 L161,427 L135,442 L127,437 L120,466 L132,487 L171,492 L157,506 L155,522 L166,534 L186,537 L176,542 L158,540 L139,494 L122,490 L113,495 L129,537 L158,552 L178,552 L196,544 L219,513 L222,382 L206,342 L171,301 L180,278 L198,275 L211,284 L213,299 L210,304 L203,295 L193,295 L190,311 L209,319 L226,303 L223,519 L206,563 L170,594 L155,596 L145,584 L145,574 L154,566 L167,577 L172,574 L171,564 L159,555 L141,555 L127,569 L121,564 L111,566 L109,570 L131,594 L114,603 L109,619 L119,612 L166,612 L192,598 L218,562 L232,513 L247,562 L271,596 L303,613 L346,612 L356,619 L348,599 L333,594 L356,568 L345,564 L338,569 L326,556 L308,554 L294,564 L293,574 L297,578 L312,566 L320,584 L310,596 L297,595 L261,565 L242,517 L239,303 L255,319 L275,311 L273,296 L262,295 L255,304 L251,299 L255,283 L265,276 L285,278 L294,301 L259,342 L243,382 L246,513 L269,544 L287,552 L307,552 L336,537 L352,495 L330,491 L307,540 L279,538 L303,532 L310,522 L307,504 L293,492 L326,490 L343,467 L337,437 L327,441 L304,428 L297,416 L288,429 L296,446 L285,463 L291,471 L305,473 L313,464 L305,453 L314,449 L324,463 L320,477 L310,481 L288,477 L273,462 L266,445 L266,407 L282,380 L301,376 L314,385 L314,395 L300,391 L294,398 L294,407 L301,413 L316,412 L328,400 L325,383 L305,370 L314,363 L314,347 L303,360 L266,382 L254,414 L263,466 L290,491 L278,496 L275,511 L288,516 L297,507 L300,519 L289,529 L277,530 L265,524 L257,511 L251,423 L255,368 L260,357 L281,340 L298,342 L285,349 L294,358 L303,356 L309,345 L301,331 L287,330 L304,303 L292,249 L283,255 L283,269 L256,268 L238,285 L243,269 L280,238 L284,218 L271,167 L266,167 L261,185 L269,223 L239,257 L262,223 L255,164 L264,151 L253,149 L244,163 L249,226 L240,236 L242,145 L251,138 L259,144 L262,134 L255,126 L242,127 L250,101 Z" />
+                </svg>
+            </a>
+
+            <!-- Item 3: Phone / WA -->
+            <a href="tel:+6282388359836" class="group relative overflow-hidden p-4 rounded-3xl bg-gradient-to-r from-emerald-50/90 via-teal-100/50 to-emerald-200/60 border border-emerald-200/60 flex items-center justify-between hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex items-center space-x-3.5 relative z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Phone / WA</div>
+                        <div class="text-xs font-bold text-slate-900 truncate group-hover:text-emerald-600 transition-colors">+62 823-8835-9836</div>
+                    </div>
+                </div>
+
+                <!-- Batik Pucuk Rebung SVG -->
+                <svg class="absolute right-0 top-0 bottom-0 h-full w-auto text-emerald-900/15 group-hover:text-emerald-900/25 transition-all duration-300 pointer-events-none py-1" viewBox="0 0 466 659" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M232,41 L215,101 L223,127 L209,127 L202,138 L207,144 L213,138 L223,143 L225,236 L215,222 L221,165 L213,150 L201,152 L210,164 L203,223 L226,257 L196,223 L204,185 L199,167 L194,168 L181,219 L188,242 L222,269 L227,285 L209,268 L182,269 L182,255 L174,248 L161,303 L178,330 L163,332 L156,346 L162,356 L171,358 L180,348 L167,342 L184,340 L205,357 L214,400 L209,509 L203,521 L189,530 L176,529 L166,521 L168,507 L177,516 L190,511 L186,495 L170,491 L198,471 L207,446 L209,415 L196,380 L158,358 L149,347 L149,362 L159,370 L138,384 L136,401 L150,413 L163,413 L170,399 L162,391 L149,395 L151,384 L161,376 L183,381 L198,408 L197,448 L185,469 L170,480 L154,481 L140,473 L140,461 L149,449 L159,454 L151,461 L158,473 L170,473 L177,466 L178,457 L167,445 L176,429 L166,416 L161,427 L135,442 L127,437 L120,466 L132,487 L171,492 L157,506 L155,522 L166,534 L186,537 L176,542 L158,540 L139,494 L122,490 L113,495 L129,537 L158,552 L178,552 L196,544 L219,513 L222,382 L206,342 L171,301 L180,278 L198,275 L211,284 L213,299 L210,304 L203,295 L193,295 L190,311 L209,319 L226,303 L223,519 L206,563 L170,594 L155,596 L145,584 L145,574 L154,566 L167,577 L172,574 L171,564 L159,555 L141,555 L127,569 L121,564 L111,566 L109,570 L131,594 L114,603 L109,619 L119,612 L166,612 L192,598 L218,562 L232,513 L247,562 L271,596 L303,613 L346,612 L356,619 L348,599 L333,594 L356,568 L345,564 L338,569 L326,556 L308,554 L294,564 L293,574 L297,578 L312,566 L320,584 L310,596 L297,595 L261,565 L242,517 L239,303 L255,319 L275,311 L273,296 L262,295 L255,304 L251,299 L255,283 L265,276 L285,278 L294,301 L259,342 L243,382 L246,513 L269,544 L287,552 L307,552 L336,537 L352,495 L330,491 L307,540 L279,538 L303,532 L310,522 L307,504 L293,492 L326,490 L343,467 L337,437 L327,441 L304,428 L297,416 L288,429 L296,446 L285,463 L291,471 L305,473 L313,464 L305,453 L314,449 L324,463 L320,477 L310,481 L288,477 L273,462 L266,445 L266,407 L282,380 L301,376 L314,385 L314,395 L300,391 L294,398 L294,407 L301,413 L316,412 L328,400 L325,383 L305,370 L314,363 L314,347 L303,360 L266,382 L254,414 L263,466 L290,491 L278,496 L275,511 L288,516 L297,507 L300,519 L289,529 L277,530 L265,524 L257,511 L251,423 L255,368 L260,357 L281,340 L298,342 L285,349 L294,358 L303,356 L309,345 L301,331 L287,330 L304,303 L292,249 L283,255 L283,269 L256,268 L238,285 L243,269 L280,238 L284,218 L271,167 L266,167 L261,185 L269,223 L239,257 L262,223 L255,164 L264,151 L253,149 L244,163 L249,226 L240,236 L242,145 L251,138 L259,144 L262,134 L255,126 L242,127 L250,101 Z" />
+                </svg>
+            </a>
+
+            <!-- Item 4: Status -->
+            <div class="group relative overflow-hidden p-4 rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white flex items-center justify-between shadow-lg border border-slate-800 hover:border-emerald-500/40 transition-all duration-300">
+                <!-- Ambient Glow Effect -->
+                <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-emerald-500/20 rounded-full blur-xl group-hover:bg-emerald-500/30 transition-all duration-500 pointer-events-none"></div>
+
+                <div class="relative z-10 flex items-center justify-between w-full pr-10">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-wider text-slate-400 font-medium">Status</div>
+                        <div class="text-xs font-bold text-emerald-400 flex items-center gap-2 mt-0.5">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                            </span>
+                            Available to Work
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-lg">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+
+                <!-- Batik Pucuk Rebung SVG -->
+                <svg class="absolute right-0 top-0 bottom-0 h-full w-auto text-emerald-400/20 group-hover:text-emerald-400/35 transition-all duration-300 pointer-events-none py-1" viewBox="0 0 466 659" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M232,41 L215,101 L223,127 L209,127 L202,138 L207,144 L213,138 L223,143 L225,236 L215,222 L221,165 L213,150 L201,152 L210,164 L203,223 L226,257 L196,223 L204,185 L199,167 L194,168 L181,219 L188,242 L222,269 L227,285 L209,268 L182,269 L182,255 L174,248 L161,303 L178,330 L163,332 L156,346 L162,356 L171,358 L180,348 L167,342 L184,340 L205,357 L214,400 L209,509 L203,521 L189,530 L176,529 L166,521 L168,507 L177,516 L190,511 L186,495 L170,491 L198,471 L207,446 L209,415 L196,380 L158,358 L149,347 L149,362 L159,370 L138,384 L136,401 L150,413 L163,413 L170,399 L162,391 L149,395 L151,384 L161,376 L183,381 L198,408 L197,448 L185,469 L170,480 L154,481 L140,473 L140,461 L149,449 L159,454 L151,461 L158,473 L170,473 L177,466 L178,457 L167,445 L176,429 L166,416 L161,427 L135,442 L127,437 L120,466 L132,487 L171,492 L157,506 L155,522 L166,534 L186,537 L176,542 L158,540 L139,494 L122,490 L113,495 L129,537 L158,552 L178,552 L196,544 L219,513 L222,382 L206,342 L171,301 L180,278 L198,275 L211,284 L213,299 L210,304 L203,295 L193,295 L190,311 L209,319 L226,303 L223,519 L206,563 L170,594 L155,596 L145,584 L145,574 L154,566 L167,577 L172,574 L171,564 L159,555 L141,555 L127,569 L121,564 L111,566 L109,570 L131,594 L114,603 L109,619 L119,612 L166,612 L192,598 L218,562 L232,513 L247,562 L271,596 L303,613 L346,612 L356,619 L348,599 L333,594 L356,568 L345,564 L338,569 L326,556 L308,554 L294,564 L293,574 L297,578 L312,566 L320,584 L310,596 L297,595 L261,565 L242,517 L239,303 L255,319 L275,311 L273,296 L262,295 L255,304 L251,299 L255,283 L265,276 L285,278 L294,301 L259,342 L243,382 L246,513 L269,544 L287,552 L307,552 L336,537 L352,495 L330,491 L307,540 L279,538 L303,532 L310,522 L307,504 L293,492 L326,490 L343,467 L337,437 L327,441 L304,428 L297,416 L288,429 L296,446 L285,463 L291,471 L305,473 L313,464 L305,453 L314,449 L324,463 L320,477 L310,481 L288,477 L273,462 L266,445 L266,407 L282,380 L301,376 L314,385 L314,395 L300,391 L294,398 L294,407 L301,413 L316,412 L328,400 L325,383 L305,370 L314,363 L314,347 L303,360 L266,382 L254,414 L263,466 L290,491 L278,496 L275,511 L288,516 L297,507 L300,519 L289,529 L277,530 L265,524 L257,511 L251,423 L255,368 L260,357 L281,340 L298,342 L285,349 L294,358 L303,356 L309,345 L301,331 L287,330 L304,303 L292,249 L283,255 L283,269 L256,268 L238,285 L243,269 L280,238 L284,218 L271,167 L266,167 L261,185 L269,223 L239,257 L262,223 L255,164 L264,151 L253,149 L244,163 L249,226 L240,236 L242,145 L251,138 L259,144 L262,134 L255,126 L242,127 L250,101 Z" />
+                </svg>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        <!-- FOOTER -->
+        <footer class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-satellite-dish text-emerald-600"></i>
+                <span>© 2026 <strong class="text-slate-800">Rangga Byian Tri Putra, S.T.</strong> — All Rights Reserved.</span>
+            </div>
+            <div class="font-mono text-[11px] flex items-center gap-3 text-slate-400">
+                <span>Wireless Communication & IoT Engineering</span>
+                <span>•</span>
+                <span>Riau, Indonesia</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT FOR INTERACTIVE WSN CANVAS (LIGHT THEME) -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('wsnCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+            const particleCount = 45;
+            const maxDistance = 150;
+
+            let mouse = { x: null, y: null, radius: 180 };
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class NodeParticle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 2 + 1.5;
+                    // Vibrant colors for light background
+                    const colors = ['#059669', '#0284c7', '#0d9488', '#10b981', '#0369a1'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.pulsePhase = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                    this.pulsePhase += 0.03;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    const currentRadius = this.radius + Math.sin(this.pulsePhase) * 0.6;
+                    ctx.arc(this.x, this.y, Math.max(1, currentRadius), 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 4;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new NodeParticle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < maxDistance) {
+                            const opacity = (1 - dist / maxDistance) * 0.4;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+
+                            const grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                            grad.addColorStop(0, particles[i].color);
+                            grad.addColorStop(1, particles[j].color);
+
+                            ctx.strokeStyle = grad;
+                            ctx.globalAlpha = opacity;
+                            ctx.lineWidth = 1.1;
+                            ctx.stroke();
+                            ctx.globalAlpha = 1.0;
+                        }
+                    }
+
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particles[i].x - mouse.x;
+                        const mdy = particles[i].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                        if (mdist < mouse.radius) {
+                            const mOpacity = (1 - mdist / mouse.radius) * 0.55;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = '#059669';
+                            ctx.globalAlpha = mOpacity;
+                            ctx.lineWidth = 1.3;
+                            ctx.stroke();
+                            ctx.globalAlpha = 1.0;
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        });
+    </script>
+</body>
+</html>
